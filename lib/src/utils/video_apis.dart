@@ -140,8 +140,17 @@ class VideoApis {
       } else {
         final manifest =
             await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
+        Set<String> addedQualities = {};
+
         urls.addAll(
-          manifest.videoOnly.map(
+          manifest.videoOnly.where((element) {
+            if (addedQualities.contains(element.qualityLabel)) {
+              return false;
+            } else {
+              addedQualities.add(element.qualityLabel);
+              return true;
+            }
+          }).map(
             (element) => VideoQalityUrls(
               quality: int.parse(element.qualityLabel.split('p')[0]),
               url: element.url.toString(),

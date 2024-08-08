@@ -164,7 +164,7 @@ class VideoApis {
                 url: element.url.toString(),
               ),
             ),
-          ),
+          );
         }
       }
       // Close the YoutubeExplode's http client.

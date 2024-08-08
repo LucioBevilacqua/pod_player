@@ -157,6 +157,15 @@ class VideoApis {
             ),
           ),
         );
+        if (urls.isEmpty) {
+          urls.addAll(
+            manifest.muxed.map((element) => VideoQalityUrls(
+                quality: int.parse(element.qualityLabel.split('p')[0]),
+                url: element.url.toString(),
+              ),
+            ),
+          ),
+        }
       }
       // Close the YoutubeExplode's http client.
       yt.close();
